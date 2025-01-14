@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Code here! -->
+        <h1>Giflar er nice!</h1>
+        yolo
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>URL</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(tool, index) in tools" :key="index">
+                    <td>{{tool.name}}</td>
+                    <td>{{tool.url}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <br>
+        <ol>
+            <li v-for="tool in tools" class="liElement">
+                {{tool.name}}, {{tool.url}}
+            </li>
+        </ol>
+
+        <button name="sendButton" @click="POST()">Klik her for at oprette ny tool</button>
+        <br>
+        <input type="text" name="inputName" class="input" placeholder="Skriv Navn" v-model="newName">
+        <input type="text" name="inputURL" class="input" placeholder="Skriv URL" v-model="newURL">
+        
+        <br>
+        <button @click="DELETE()">Klik her for at slette et tool</button>
+
+
+
+
+
+
+        <!-- But before the end of this -->
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
