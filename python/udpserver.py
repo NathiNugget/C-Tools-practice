@@ -1,6 +1,7 @@
 from socket import *
 from threading import *
 import json
+import jsonpickle
 
 serverPort = 727
 serverSocket = socket(AF_INET, SOCK_DGRAM) # UDP
@@ -17,10 +18,11 @@ print("The UDP server is ready to receive")
 
 def DoOneClient(socket_data, clientAddress): #handle one client on a separate thread
     json_dict = json.loads(socket_data.decode(encoding="utf-8"))
+    json_dict_pickle = jsonpickle.decode(socket_data.decode())
     new_pair = pair(json_dict["name"], json_dict["url"]) # instantiate new pair from json_dict
     pair_list.append(new_pair) # append to pair_list
     print(socket_data.decode(encoding="utf-8"))
-    serverSocket.sendto(json.dumps(pair_list), clientAddress) # Husk addressen for modtageren
+    serverSocket.sendto(json.dumps(pair_list, default=vars).encode(), clientAddress) # Husk addressen for modtageren
 
 while True:
     bytes, clientAddress = serverSocket.recvfrom(512)
